@@ -1,4 +1,4 @@
-﻿# Campus Customs Desk: dashboard design
+# Campus Customs Desk: dashboard design
 
 The board in `frontend/` (React + Vite + TypeScript) is where one person watches five AI agents run a small shop and holds the only checkbook. Every design choice serves two jobs: **make the agents easy to follow** and **make the money moments impossible to miss.**
 
@@ -23,7 +23,7 @@ A three-column desk, read left to right like the work itself:
 | Ticket cards (101/102/103) with status and **Run team ▸** | Selected ticket header, the five-agent roster, and the live conversation feed | Approval cards, then "What each agent did" |
 | Checking balance and ledger | | |
 
-**Sized for laptops.** On screens 1201px and wider, the board is a one-screen dashboard. The three columns fill exactly the window height, with the stage's feed and the side columns scrolling inside themselves, so the balance, the tickets and the approval card are always visible without scrolling the page. On a wide monitor the board is capped at 1480px and centered instead of stretching. I checked 1366×768 (no page scroll, no clipped labels) and 1920×1080 (centered, 296 / 818 / 346px columns). At 1500px and below the side columns slim to 260 / 300px. On short screens (≤820px tall) the top bar and ticket cards tighten. Below 1200px the right column drops under the stage, and on small screens everything stacks into one column. While the backend is unreachable, the tickets show shimmering placeholders and the stage shows the command to start the server, instead of empty boxes.
+**Sized for laptops.** On screens 1201px and wider, the board is a one-screen dashboard. The three columns fill exactly the window height, with the stage's feed and the side columns scrolling inside themselves, so the balance, the tickets and the approval card are always visible without scrolling the page. On large screens (or a zoomed-out browser) the whole board scales up in steps (×1.12 at 1700px+, ×1.25 at 1950px+, ×1.42 at 2250px+, and so on), so text and cards stay readable instead of floating tiny in the middle. The scaled board is still capped and centered. I checked 1366×768 and 1440×900 (scale 1, no page scroll, no clipped labels), 1920×1080 (scale 1.12), and 2500×1750 (scale 1.42), all fitting exactly one screen. At 1500px and below the side columns slim to 260 / 300px. On short screens (≤820px tall) the top bar and ticket cards tighten. Below 1200px the right column drops under the stage, and on small screens everything stacks into one column. While the backend is unreachable, the tickets show shimmering placeholders and the stage shows the command to start the server, instead of empty boxes.
 
 ## How the agents read differently
 

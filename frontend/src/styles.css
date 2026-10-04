@@ -22,7 +22,8 @@
   --r: 16px;
   --pad: 22px;
   --maxw: 1480px;
-  --gutter: max(var(--pad), calc((100vw - var(--maxw)) / 2));
+  --z: 1;  /* board scale: grows on big screens so text and cards stay readable */
+  --gutter: max(var(--pad), calc((100vw / var(--z) - var(--maxw)) / 2));
   --shadow: 0 1px 2px rgba(14, 27, 61, .04), 0 8px 24px -12px rgba(14, 27, 61, .12);
 }
 
@@ -35,7 +36,7 @@ code, .mono { font-family: var(--mono); }
 .small { font-size: 12.5px; }
 .neg { color: var(--blue-deep); }
 
-.app { min-height: 100vh; position: relative; overflow-x: hidden; }
+.app { min-height: calc(100vh / var(--z)); position: relative; overflow-x: hidden; zoom: var(--z); }
 .glow {
   position: fixed; inset: -40vh -10vw auto auto; width: 70vw; height: 80vh; pointer-events: none; z-index: 0;
   background: radial-gradient(closest-side, rgba(0, 53, 107, .10), transparent 70%);
@@ -193,7 +194,7 @@ h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: 1.4px; text-transform: up
 .col-center {
   position: sticky; top: 16px;
   display: flex; flex-direction: column; gap: 12px;
-  height: calc(100vh - 72px - 32px); min-height: 520px;
+  height: calc(100vh / var(--z) - 72px - 32px); min-height: 520px;
 }
 .stage-head { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
 .stage-head > div:first-child { min-width: 0; }
@@ -363,9 +364,18 @@ h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: 1.4px; text-transform: up
 .toast-ok { background: var(--blue); }
 .toast-err { background: var(--err); }
 
+/* ---------- big screens: scale the whole board up ----------
+   Large monitors (or a zoomed-out browser) give 2000+ CSS px; at 1:1 the board
+   is tiny and floats in empty space. Step the scale up with the window size. */
+@media (min-width: 1700px) and (min-height: 950px) { :root { --z: 1.12; } }
+@media (min-width: 1950px) and (min-height: 1080px) { :root { --z: 1.25; } }
+@media (min-width: 2250px) and (min-height: 1250px) { :root { --z: 1.42; } }
+@media (min-width: 2700px) and (min-height: 1500px) { :root { --z: 1.65; } }
+@media (min-width: 3300px) and (min-height: 1850px) { :root { --z: 2; } }
+
 /* ---------- one-screen dashboard (laptop and wider) ---------- */
 @media (min-width: 1201px) {
-  .app { height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+  .app { height: calc(100vh / var(--z)); overflow: hidden; display: flex; flex-direction: column; }
   .grid { flex: 1; min-height: 0; align-items: stretch; padding-bottom: 16px; }
   .col-left, .col-right {
     min-height: 0; overflow-y: auto; padding: 2px 4px 6px 2px; margin: -2px -4px 0 -2px;
@@ -385,7 +395,7 @@ h3 { margin: 0 0 8px; font-size: 11px; letter-spacing: 1.4px; text-transform: up
 /* Short laptop screens (768 px tall): trim vertical chrome so the feed keeps room. */
 @media (max-height: 820px) {
   .topbar { height: 62px; padding-top: 10px; padding-bottom: 10px; }
-  .col-center { height: calc(100vh - 62px - 28px); }
+  .col-center { height: calc(100vh / var(--z) - 62px - 28px); }
   .grid { padding-top: 12px; }
   .brand .small { display: none; }
   .ticket { padding: 9px 12px; }
