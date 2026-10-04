@@ -143,3 +143,18 @@ None yet.
 ### What was lacking after the first prompt
 
 My draft answers were right but general, so each one had to be tied to evidence from the actual run (run IDs, dollar amounts, tool calls, token counts, and real items in the database like the out-of-stock Crest Mug and the $2,400 rent due 2026-10-02 against $152 left).
+
+## Problem 11: Submit to GitHub
+
+### Original prompt
+
+now problem 11: submit to GitHub. push your code to a public GitHub repo so graders can clone it. i will have to submit the repo url to canvas and also put it in output/github_url.txt. do not push the real .env to the GitHub repo. do include both database files under data/ (the original and your working copy) so graders can run the app easily. the expected file layout is attached. README should explain: copy original DB to the working copy when you need a clean run, start mcp server, start fastapi backend, start the reach board, reset the db before a full three-ticket run.
+
+### Follow-up prompts
+
+None yet.
+
+### What was lacking after the first prompt
+
+The prompt didn't mention that .mcp.json held absolute paths to this laptop's venv, so it had to be made portable (python mcp_server/server.py, with the backend filling in the real interpreter and path) before graders could clone and run it.
+
