@@ -1,0 +1,192 @@
+{
+  "problem": "HW5 Problem 9: resolve the tickets",
+  "database": "data/campus_customs_new.db (reset from data/campus_customs.db before the run)",
+  "model": "gpt-6-luna via Portkey",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 152.0,
+  "cash_check": "3400.00 - 3248.00 = 152.00; cash_accounts.checking = 152.00",
+  "totals": {
+    "runs": 6,
+    "delegations": 8,
+    "model_requests": 65,
+    "tokens": 236262
+  },
+  "tickets": [
+    {
+      "id": 101,
+      "requester": "Tauhid Zaman",
+      "type": "customer_order",
+      "final_status": "resolved",
+      "outcome": "Out of stock (size S: 0). Overdue invoice 501 ($840) was paid with human approval, which unblocked Bulldog Print Co; a 1-tee restock PO ($8) was approved and placed with expected arrival 2026-09-05. Tauhid has an unsent draft (#3) saying the tee is ordered and expected Sept 5 (estimate, not a guarantee).",
+      "agents": {
+        "boss": "Read the ticket and cash, delegated in 3 runs (Accounting + Customer Service, then Inventory + Customer Service, then Customer Service), set status waiting_on_approval -> waiting_on_vendor.",
+        "accounting": "Confirmed invoice 501 ($840, 3 days overdue) blocks the vendor; filed approval request #1 for exactly $840.",
+        "inventory": "After 501 was paid: check_stock (0 on hand, short 1), get_vendor_status (Bulldog Print Co can ship, 5-day lead), create_purchase_order -> PO #1 for 1 x CC-TEE-WHITE S at $8 with approval request #2.",
+        "customer_service": "Wrote drafts #1 (out of stock, no date yet), #2 (restock awaiting approval, Sept 5 if approved) and #3 (restock placed, expected Sept 5). Never sent; never mentioned the unpaid bill.",
+        "facilities": "Not involved."
+      },
+      "human_actions": [
+        "Approved request #1 ($840, invoice 501)",
+        "Approved request #2 ($8, PO #1)",
+        "Marked ticket resolved after the Boss set waiting_on_vendor (shop-side work complete: bill paid, restock placed, customer reply drafted)"
+      ],
+      "human_approvals": [
+        {
+          "request_id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "payee": "Bulldog Print Co",
+          "requested_by": "accounting",
+          "decision": "approved and paid",
+          "approved_by": "Dhriti Swarup",
+          "decided_at": "2026-10-04T15:35:54",
+          "payment_id": 1
+        },
+        {
+          "request_id": 2,
+          "kind": "purchase_order",
+          "ref_id": 1,
+          "amount": 8.0,
+          "payee": "Bulldog Print Co",
+          "requested_by": "inventory",
+          "decision": "approved and paid",
+          "approved_by": "Dhriti Swarup",
+          "decided_at": "2026-10-04T15:39:22",
+          "payment_id": 2
+        }
+      ],
+      "resolved": {
+        "by": "human:Dhriti Swarup",
+        "at": "2026-10-04T15:41:18"
+      },
+      "runs": [
+        {
+          "run_id": "run-d6de4f8723bc",
+          "started": "2026-10-04T15:30:51",
+          "finished": "2026-10-04T15:35:38",
+          "delegations": [
+            "boss -> accounting",
+            "boss -> customer_service"
+          ],
+          "model_requests": 15,
+          "tokens": 58505
+        },
+        {
+          "run_id": "run-af0dd99f5d5a",
+          "started": "2026-10-04T15:36:17",
+          "finished": "2026-10-04T15:39:08",
+          "delegations": [
+            "boss -> inventory",
+            "boss -> customer_service"
+          ],
+          "model_requests": 15,
+          "tokens": 58973
+        },
+        {
+          "run_id": "run-3c21149ad0bf",
+          "started": "2026-10-04T15:39:34",
+          "finished": "2026-10-04T15:41:04",
+          "delegations": [
+            "boss -> customer_service"
+          ],
+          "model_requests": 8,
+          "tokens": 31613
+        }
+      ],
+      "cash_change": -848.0
+    },
+    {
+      "id": 102,
+      "requester": "Elm City Properties",
+      "type": "rent_notice",
+      "final_status": "resolved",
+      "outcome": "Rent of $2,400 for lease 1 (Chapel Street shop) was confirmed against the lease row and paid with human approval before the 2026-09-02 due date; lease next_due advanced to 2026-10-02. The Boss resolved the ticket itself on a follow-up run.",
+      "agents": {
+        "boss": "Delegated only to Facilities, set waiting_on_approval; on the follow-up run saw payment #3 and set the ticket resolved (no delegation).",
+        "facilities": "get_rent_due(lease 1): $2,400 due 2026-09-02, 2 days out, cash covers it; filed approval request #3 for exactly $2,400.",
+        "inventory": "Not involved.",
+        "accounting": "Not involved.",
+        "customer_service": "Not involved."
+      },
+      "human_actions": [
+        "Approved request #3 ($2,400 rent)"
+      ],
+      "human_approvals": [
+        {
+          "request_id": 3,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "payee": "Elm City Properties",
+          "requested_by": "facilities",
+          "decision": "approved and paid",
+          "approved_by": "Dhriti Swarup",
+          "decided_at": "2026-10-04T15:42:07",
+          "payment_id": 3
+        }
+      ],
+      "resolved": {
+        "by": "boss",
+        "at": "2026-10-04T15:42:16"
+      },
+      "runs": [
+        {
+          "run_id": "run-55290035b573",
+          "started": "2026-10-04T15:41:27",
+          "finished": "2026-10-04T15:41:53",
+          "delegations": [
+            "boss -> facilities"
+          ],
+          "model_requests": 9,
+          "tokens": 25398
+        },
+        {
+          "run_id": "run-19373698b87d",
+          "started": "2026-10-04T15:42:10",
+          "finished": "2026-10-04T15:42:22",
+          "delegations": [],
+          "model_requests": 3,
+          "tokens": 9182
+        }
+      ],
+      "cash_change": -2400.0
+    },
+    {
+      "id": 103,
+      "requester": "Yale AI Club",
+      "type": "price_override",
+      "final_status": "resolved",
+      "outcome": "Bulk discount set: quote #1 = 20 x CC-HOOD-NAVY size M at 20% off, $46.40 each, $928.00 total ($24.40 margin per unit, above the $22 cost). Draft #4 tells the club 8 are on hand and 12 need restocking with no confirmed date. No restock was ordered: 12 x $22 = $264 is more than the $152 left after rent and the 501 invoice.",
+      "agents": {
+        "boss": "Delegated to Accounting (quote) then Customer Service (reply), set in_progress.",
+        "accounting": "check_stock (8 on hand, short 12), preview_discount at 10%, 15% and 20%, create_quote at 20% -> quote #1 ($46.40 x 20 = $928).",
+        "customer_service": "Draft #4 to Yale AI Club with the exact quoted price, the 8-now / 12-restock split, and no promised date.",
+        "inventory": "Not called (Accounting's check_stock and the ticket's linked inventory row covered the shortfall).",
+        "facilities": "Not involved."
+      },
+      "human_actions": [
+        "Marked ticket resolved: discount request answered with a saved quote and customer draft; restock deferred because cash ($152) does not cover $264"
+      ],
+      "human_approvals": [],
+      "resolved": {
+        "by": "human:Dhriti Swarup",
+        "at": "2026-10-04T15:43:36"
+      },
+      "runs": [
+        {
+          "run_id": "run-bb102012c85d",
+          "started": "2026-10-04T15:42:35",
+          "finished": "2026-10-04T15:43:21",
+          "delegations": [
+            "boss -> accounting",
+            "boss -> customer_service"
+          ],
+          "model_requests": 15,
+          "tokens": 52591
+        }
+      ],
+      "cash_change": 0
+    }
+  ]
+}

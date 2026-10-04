@@ -1,0 +1,25 @@
+# Secrets: never commit real keys (copy .env.example to .env instead)
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Local / OS / editor
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Course download (the databases are committed unzipped under data/)
+data.zip
